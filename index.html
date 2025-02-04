@@ -1,0 +1,205 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEGA ROBUX RAFFLE 🎉</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: url('https://images.alphacoders.com/121/1217518.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        /* Dark overlay over the site background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Darker overlay */
+            z-index: 0;
+        }
+        .phone-frame {
+            width: 390px;
+            height: 800px;
+            background: url('https://preview.redd.it/what-is-your-favorite-iphone-and-ios-default-wallpaper-v0-4s5ngbslqq4c1.jpg?width=1080&crop=smart&auto=webp&s=5ee1a96a26f93f15f1f7c185a4617968ba1fcc71') no-repeat center center / cover;
+            border-radius: 40px;
+            border: 5px solid #fff; /* Brightened phone outline */
+            position: relative;
+            padding: 60px 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.9); /* Shadow for contrast */
+            z-index: 1; /* Ensure phone is above the background */
+        }
+        .container {
+            background: rgba(15, 15, 15, 0.9); /* Darker box for better contrast */
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        h1 {
+            font-weight: 700;
+            font-size: 24px;
+        }
+        h2 {
+            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .highlight {
+            color: #ffcc00;
+            font-size: 30px;
+            animation: highlightEffect 1.5s ease-in-out infinite;
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #333;
+            color: white;
+            text-align: center;
+        }
+        .button {
+            padding: 12px;
+            width: 100%;
+            background: #ffcc00;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #e6b800;
+        }
+        #raffleBtn {
+            display: none;
+        }
+        #status {
+            opacity: 0;
+            animation: fadeIn 1s forwards 1s;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes highlightEffect {
+            0% { color: #ffcc00; }
+            50% { color: #e6b800; }
+            100% { color: #ffcc00; }
+        }
+        .glow-effect {
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00, 0 0 40px #ffcc00;
+            transition: text-shadow 0.3s ease-in-out;
+        }
+        .glow-effect:hover {
+            text-shadow: 0 0 15px #e6b800, 0 0 25px #e6b800, 0 0 35px #e6b800, 0 0 50px #e6b800;
+        }
+        .bottom-bar {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 5px;
+            background: #333;
+            border-radius: 10px;
+        }
+        .camera {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #333;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        @media (max-width: 600px) {
+            .phone-frame {
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 20px;
+            }
+            .notch {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="camera"></div> <!-- Camera at the top -->
+        <div class="container">
+            <h1>MEGA ROBUX RAFFLE 🎉</h1>
+            <h2><span class="highlight">150K ROBUX!</span></h2>
+            <p><b>Enter your Roblox username:</b></p>
+            <input type="text" id="username" placeholder="Username">
+            <button class="button" id="continueBtn" onclick="validateUsername()">Continue</button>
+            <p id="status"></p>
+            <button class="button glow-effect" id="raffleBtn" onclick="completeSurvey()">Complete Survey to Enter</button>
+        </div>
+        <div class="bottom-bar"></div> <!-- Bottom bar like iPhone -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3/dist/confetti.browser.min.js"></script>
+    <script>
+        function validateUsername() {
+            let username = document.getElementById('username').value;
+            let status = document.getElementById('status');
+            let raffleBtn = document.getElementById('raffleBtn');
+            if (username.length > 3) {
+                status.innerText = "Validating username...";
+                setTimeout(() => {
+                    status.innerText = "Checking parameters & verifying integrity...";
+                    setTimeout(() => {
+                        status.innerText = "✅ Username validated! You must complete a survey to finalize entry.";
+                        raffleBtn.style.display = "block";
+                        launchConfetti();
+                    }, 1500);
+                }, 1500);
+            } else {
+                status.innerText = "Please enter a valid username.";
+                raffleBtn.style.display = "none";
+            }
+        }
+        
+        function launchConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+        
+        function completeSurvey() {
+            // Open survey in new tab
+            window.open("https://unlockrwrd.com/QePvIae", "_blank");
+        }
+    </script>
+</body>
+</html>

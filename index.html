@@ -140,10 +140,11 @@
         @media (max-width: 600px) {
             .phone-frame {
                 width: 100%;
-                height: auto;
-                box-shadow: none;
-                border-radius: 0;
-                padding: 20px;
+                height: 100vh; /* Stretch to full height of the viewport */
+                border-radius: 0; /* Remove border radius for full-screen effect */
+                padding: 60px 20px; /* Adjust padding to ensure content fits well */
+                margin: 0; /* Remove any default margin */
+                box-shadow: none; /* Remove shadow for full-screen effect */
             }
             .notch {
                 display: none;
